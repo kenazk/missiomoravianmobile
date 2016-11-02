@@ -1,25 +1,15 @@
 $(document).ready(function() {
-    //feed to parse
-    var feed = "http://feeds.feedburner.com/raymondcamdensblog?format=xml";
 
-    $.ajax(feed, {
-        accepts:{
-            xml:"application/rss+xml"
-        },
-        dataType:"xml",
-        success:function(data) {
-            //Credit: http://stackoverflow.com/questions/10943544/how-to-parse-an-rss-feed-using-javascript
+    var url = 'http://fetchrss.com/rss/58191cb88a93f87f4ee0dfdd22358496719.xml';
+    var description = document.getElementById('body')
 
-            $(data).find("item").each(function () { // or "item" or whatever suits your feed
-                var el = $(this);
-                console.log("------------------------");
-                console.log("title      : " + el.find("title").text());
-                console.log("link       : " + el.find("link").text());
-                console.log("description: " + el.find("description").text());
-            });
-
-
+    feednami.load(url,function(result){
+        if(result.error) {
+            console.log(result.error);
+        } else {
+            var entries = result.feed.entries;
+            console.log(entries[0].description)
+            description.innerHTML = entries[0].description
         }
     });
-
 });
