@@ -7,6 +7,7 @@ $(document).ready(function() {
     feednami.load(url,function(result){
         if(result.error) {
             console.log(result.error);
+            console.log(result)
         } else {
             var entries = result.feed.entries;
             console.log(entries[0].description)
